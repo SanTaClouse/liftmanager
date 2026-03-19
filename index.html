@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LiftManager — Gestión de ascensores, montautos y portones</title>
-  <meta name="description" content="Sistema de gestión para empresas de mantenimiento de equipos de elevación. Órdenes de trabajo con QR, historial por edificio, portal para consorcios y facturación con AFIP." />
+  <meta name="description"
+    content="Sistema de gestión para empresas de mantenimiento de equipos de elevación. Órdenes de trabajo con QR, historial por edificio, portal para consorcios y facturación con AFIP." />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap"
+    rel="stylesheet" />
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -18,25 +21,33 @@
     /* ─────────────────────────────────────────────
        RESET & BASE
     ───────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:          #0a0f1e;
-      --bg-card:     #111827;
-      --bg-card-alt: #0d1424;
-      --border:      rgba(255,255,255,.07);
-      --amber:       #f59e0b;
-      --amber-dim:   #d97706;
-      --blue:        #3b82f6;
-      --blue-dim:    #2563eb;
-      --text:        #e2e8f0;
-      --text-muted:  #94a3b8;
-      --text-dim:    #64748b;
-      --radius:      12px;
-      --radius-lg:   18px;
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    html { scroll-behavior: smooth; }
+    :root {
+      --bg: #0a0f1e;
+      --bg-card: #111827;
+      --bg-card-alt: #0d1424;
+      --border: rgba(255, 255, 255, .07);
+      --amber: #f59e0b;
+      --amber-dim: #d97706;
+      --blue: #3b82f6;
+      --blue-dim: #2563eb;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --radius: 12px;
+      --radius-lg: 18px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       background: var(--bg);
@@ -47,15 +58,24 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3, h4 {
+    h1,
+    h2,
+    h3,
+    h4 {
       font-family: 'Sora', sans-serif;
       line-height: 1.2;
       letter-spacing: -.02em;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-    img { display: block; max-width: 100%; }
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
     /* ─────────────────────────────────────────────
        UTILITIES
@@ -81,26 +101,45 @@
       transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
       white-space: nowrap;
     }
-    .btn:hover  { transform: translateY(-2px); }
-    .btn:active { transform: translateY(0); }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
 
     .btn-primary {
       background: var(--amber);
       color: #0a0f1e;
-      box-shadow: 0 4px 20px rgba(245,158,11,.30);
+      box-shadow: 0 4px 20px rgba(245, 158, 11, .30);
     }
-    .btn-primary:hover { background: #fbbf24; box-shadow: 0 6px 28px rgba(245,158,11,.45); }
+
+    .btn-primary:hover {
+      background: #fbbf24;
+      box-shadow: 0 6px 28px rgba(245, 158, 11, .45);
+    }
 
     .btn-outline {
       background: transparent;
       color: var(--amber);
       border: 1.5px solid var(--amber);
     }
-    .btn-outline:hover { background: rgba(245,158,11,.08); }
 
-    .btn-lg { padding: 18px 36px; font-size: 17px; border-radius: 10px; }
+    .btn-outline:hover {
+      background: rgba(245, 158, 11, .08);
+    }
 
-    .section { padding: 96px 0; }
+    .btn-lg {
+      padding: 18px 36px;
+      font-size: 17px;
+      border-radius: 10px;
+    }
+
+    .section {
+      padding: 96px 0;
+    }
 
     .section-label {
       display: inline-block;
@@ -126,14 +165,22 @@
       line-height: 1.7;
     }
 
-    .section-header { margin-bottom: 56px; }
-    .section-header.centered { text-align: center; }
-    .section-header.centered .section-sub { margin: 0 auto; }
+    .section-header {
+      margin-bottom: 56px;
+    }
+
+    .section-header.centered {
+      text-align: center;
+    }
+
+    .section-header.centered .section-sub {
+      margin: 0 auto;
+    }
 
     /* Gradient dividers */
     .grad-divider {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(245,158,11,.3) 30%, rgba(59,130,246,.3) 70%, transparent);
+      background: linear-gradient(90deg, transparent, rgba(245, 158, 11, .3) 30%, rgba(59, 130, 246, .3) 70%, transparent);
     }
 
     /* Scroll-reveal */
@@ -142,37 +189,55 @@
       transform: translateY(28px);
       transition: opacity .55s ease, transform .55s ease;
     }
+
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    .reveal-delay-1 { transition-delay: .1s; }
-    .reveal-delay-2 { transition-delay: .2s; }
-    .reveal-delay-3 { transition-delay: .3s; }
-    .reveal-delay-4 { transition-delay: .4s; }
+
+    .reveal-delay-1 {
+      transition-delay: .1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: .2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: .3s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: .4s;
+    }
 
     /* ─────────────────────────────────────────────
        NAVBAR
     ───────────────────────────────────────────── */
     #navbar {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 999;
       transition: background .3s, backdrop-filter .3s, border-color .3s;
       border-bottom: 1px solid transparent;
     }
+
     #navbar.scrolled {
-      background: rgba(10,15,30,.88);
+      background: rgba(10, 15, 30, .88);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-color: var(--border);
     }
+
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 68px;
     }
+
     .nav-logo {
       display: flex;
       align-items: center;
@@ -183,29 +248,42 @@
       color: #fff;
       letter-spacing: -.02em;
     }
+
     .nav-logo-icon {
-      width: 34px; height: 34px;
+      width: 34px;
+      height: 34px;
       background: var(--amber);
       border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: #0a0f1e;
       flex-shrink: 0;
     }
+
     .nav-links {
       display: flex;
       align-items: center;
       gap: 32px;
       list-style: none;
     }
+
     .nav-links a {
       font-size: 14px;
       font-weight: 500;
       color: var(--text-muted);
       transition: color .15s;
     }
-    .nav-links a:hover { color: #fff; }
 
-    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
 
     .nav-menu-btn {
       display: none;
@@ -220,14 +298,21 @@
     .mobile-menu {
       display: none;
       position: fixed;
-      top: 68px; left: 0; right: 0; bottom: 0;
-      background: rgba(10,15,30,.97);
+      top: 68px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(10, 15, 30, .97);
       z-index: 998;
       padding: 32px 24px;
       flex-direction: column;
       gap: 24px;
     }
-    .mobile-menu.open { display: flex; }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
     .mobile-menu a {
       font-family: 'Sora', sans-serif;
       font-size: 22px;
@@ -235,13 +320,27 @@
       color: var(--text-muted);
       transition: color .15s;
     }
-    .mobile-menu a:hover { color: #fff; }
-    .mobile-menu .btn { width: fit-content; }
+
+    .mobile-menu a:hover {
+      color: #fff;
+    }
+
+    .mobile-menu .btn {
+      width: fit-content;
+    }
 
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .nav-right .btn { display: none; }
-      .nav-menu-btn { display: block; }
+      .nav-links {
+        display: none;
+      }
+
+      .nav-right .btn {
+        display: none;
+      }
+
+      .nav-menu-btn {
+        display: block;
+      }
     }
 
     /* ─────────────────────────────────────────────
@@ -261,15 +360,21 @@
       pointer-events: none;
       z-index: 0;
     }
+
     .hero-blob-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(245,158,11,.12) 0%, transparent 70%);
-      top: -100px; left: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(245, 158, 11, .12) 0%, transparent 70%);
+      top: -100px;
+      left: -100px;
     }
+
     .hero-blob-2 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(59,130,246,.10) 0%, transparent 70%);
-      top: 50px; right: -80px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(59, 130, 246, .10) 0%, transparent 70%);
+      top: 50px;
+      right: -80px;
     }
 
     .hero-inner {
@@ -285,8 +390,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(245,158,11,.10);
-      border: 1px solid rgba(245,158,11,.25);
+      background: rgba(245, 158, 11, .10);
+      border: 1px solid rgba(245, 158, 11, .25);
       border-radius: 999px;
       padding: 6px 14px;
       font-size: 13px;
@@ -294,15 +399,27 @@
       color: var(--amber);
       margin-bottom: 28px;
     }
+
     .hero-badge-dot {
-      width: 7px; height: 7px;
+      width: 7px;
+      height: 7px;
       background: var(--amber);
       border-radius: 50%;
       animation: pulse-dot 2s infinite;
     }
+
     @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: .5; transform: scale(.8); }
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .5;
+        transform: scale(.8);
+      }
     }
 
     .hero-title {
@@ -310,7 +427,10 @@
       color: #fff;
       margin-bottom: 24px;
     }
-    .hero-title span { color: var(--amber); }
+
+    .hero-title span {
+      color: var(--amber);
+    }
 
     .hero-sub {
       font-size: 18px;
@@ -335,19 +455,25 @@
       font-size: 13px;
       color: var(--text-dim);
     }
-    .hero-trust-icon { color: var(--amber); flex-shrink: 0; }
+
+    .hero-trust-icon {
+      color: var(--amber);
+      flex-shrink: 0;
+    }
 
     /* Hero visual panel */
     .hero-visual {
       position: relative;
     }
+
     .hero-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 28px;
-      box-shadow: 0 32px 80px rgba(0,0,0,.5);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, .5);
     }
+
     .hero-card-header {
       display: flex;
       align-items: center;
@@ -356,13 +482,19 @@
       padding-bottom: 16px;
       border-bottom: 1px solid var(--border);
     }
+
     .hero-card-title {
       font-family: 'Sora', sans-serif;
       font-size: 15px;
       font-weight: 700;
       color: #fff;
     }
-    .hero-card-subtitle { font-size: 12px; color: var(--text-dim); }
+
+    .hero-card-subtitle {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
     .status-badge {
       margin-left: auto;
       font-size: 11px;
@@ -370,54 +502,113 @@
       padding: 3px 10px;
       border-radius: 999px;
     }
-    .status-pending { background: rgba(245,158,11,.15); color: var(--amber); }
-    .status-done    { background: rgba(34,197,94,.15);  color: #22c55e; }
-    .status-progress{ background: rgba(59,130,246,.15); color: var(--blue); }
 
-    .ot-list { display: flex; flex-direction: column; gap: 10px; }
+    .status-pending {
+      background: rgba(245, 158, 11, .15);
+      color: var(--amber);
+    }
+
+    .status-done {
+      background: rgba(34, 197, 94, .15);
+      color: #22c55e;
+    }
+
+    .status-progress {
+      background: rgba(59, 130, 246, .15);
+      color: var(--blue);
+    }
+
+    .ot-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     .ot-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      background: rgba(255,255,255,.03);
+      background: rgba(255, 255, 255, .03);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 12px 14px;
       transition: background .2s;
     }
-    .ot-item:hover { background: rgba(255,255,255,.055); }
+
+    .ot-item:hover {
+      background: rgba(255, 255, 255, .055);
+    }
+
     .ot-icon {
-      width: 36px; height: 36px;
+      width: 36px;
+      height: 36px;
       border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
       font-size: 15px;
     }
-    .ot-icon.amber { background: rgba(245,158,11,.12); color: var(--amber); }
-    .ot-icon.blue  { background: rgba(59,130,246,.12);  color: var(--blue); }
-    .ot-icon.green { background: rgba(34,197,94,.12);   color: #22c55e; }
-    .ot-text-main { font-size: 13px; font-weight: 600; color: #e2e8f0; }
-    .ot-text-sub  { font-size: 11px; color: var(--text-dim); }
-    .ot-meta { margin-left: auto; text-align: right; }
+
+    .ot-icon.amber {
+      background: rgba(245, 158, 11, .12);
+      color: var(--amber);
+    }
+
+    .ot-icon.blue {
+      background: rgba(59, 130, 246, .12);
+      color: var(--blue);
+    }
+
+    .ot-icon.green {
+      background: rgba(34, 197, 94, .12);
+      color: #22c55e;
+    }
+
+    .ot-text-main {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    .ot-text-sub {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .ot-meta {
+      margin-left: auto;
+      text-align: right;
+    }
 
     /* Floating stat card */
     .float-stat {
       position: absolute;
-      bottom: -18px; left: -24px;
+      bottom: -18px;
+      left: -24px;
       background: var(--bg-card);
-      border: 1px solid rgba(245,158,11,.2);
+      border: 1px solid rgba(245, 158, 11, .2);
       border-radius: var(--radius);
       padding: 14px 18px;
       display: flex;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 16px 40px rgba(0,0,0,.4);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .4);
       animation: float-anim 4s ease-in-out infinite;
     }
+
     @keyframes float-anim {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-6px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
     }
+
     .float-stat-num {
       font-family: 'Sora', sans-serif;
       font-size: 22px;
@@ -425,18 +616,33 @@
       color: var(--amber);
       line-height: 1;
     }
-    .float-stat-label { font-size: 11px; color: var(--text-dim); line-height: 1.4; }
+
+    .float-stat-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
 
     @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-visual { display: none; }
-      #hero { padding: 130px 0 72px; }
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      #hero {
+        padding: 130px 0 72px;
+      }
     }
 
     /* ─────────────────────────────────────────────
        PAIN SECTION
     ───────────────────────────────────────────── */
-    #pains { background: var(--bg-card-alt); }
+    #pains {
+      background: var(--bg-card-alt);
+    }
 
     .pain-grid {
       display: grid;
@@ -453,14 +659,18 @@
       overflow: hidden;
       transition: border-color .2s, transform .2s;
     }
+
     .pain-card:hover {
-      border-color: rgba(245,158,11,.25);
+      border-color: rgba(245, 158, 11, .25);
       transform: translateY(-4px);
     }
+
     .pain-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 3px;
       background: linear-gradient(90deg, var(--amber), transparent);
       border-radius: var(--radius-lg) var(--radius-lg) 0 0;
@@ -471,11 +681,13 @@
       margin-bottom: 20px;
       display: block;
     }
+
     .pain-title {
       font-size: 19px;
       color: #fff;
       margin-bottom: 10px;
     }
+
     .pain-desc {
       font-size: 14px;
       color: var(--text-muted);
@@ -483,7 +695,9 @@
     }
 
     @media (max-width: 768px) {
-      .pain-grid { grid-template-columns: 1fr; }
+      .pain-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ─────────────────────────────────────────────
@@ -502,11 +716,14 @@
     }
 
     .solution-icon-wrap {
-      width: 52px; height: 52px;
-      background: rgba(245,158,11,.10);
-      border: 1px solid rgba(245,158,11,.20);
+      width: 52px;
+      height: 52px;
+      background: rgba(245, 158, 11, .10);
+      border: 1px solid rgba(245, 158, 11, .20);
       border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--amber);
       flex-shrink: 0;
     }
@@ -515,6 +732,7 @@
       font-size: 19px;
       color: #fff;
     }
+
     .solution-desc {
       font-size: 14px;
       color: var(--text-muted);
@@ -526,13 +744,18 @@
     }
 
     @media (max-width: 768px) {
-      .solution-grid { grid-template-columns: 1fr; gap: 40px; }
+      .solution-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
     }
 
     /* ─────────────────────────────────────────────
        FEATURES SECTION
     ───────────────────────────────────────────── */
-    #features { background: var(--bg-card-alt); }
+    #features {
+      background: var(--bg-card-alt);
+    }
 
     .features-grid {
       display: grid;
@@ -550,17 +773,21 @@
       align-items: flex-start;
       transition: border-color .2s, transform .2s;
     }
+
     .feature-card:hover {
-      border-color: rgba(59,130,246,.3);
+      border-color: rgba(59, 130, 246, .3);
       transform: translateY(-3px);
     }
 
     .feature-icon-wrap {
-      width: 48px; height: 48px;
-      background: rgba(59,130,246,.10);
-      border: 1px solid rgba(59,130,246,.18);
+      width: 48px;
+      height: 48px;
+      background: rgba(59, 130, 246, .10);
+      border: 1px solid rgba(59, 130, 246, .18);
       border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--blue);
       flex-shrink: 0;
     }
@@ -570,6 +797,7 @@
       color: #fff;
       margin-bottom: 6px;
     }
+
     .feature-desc {
       font-size: 13px;
       color: var(--text-muted);
@@ -577,7 +805,9 @@
     }
 
     @media (max-width: 640px) {
-      .features-grid { grid-template-columns: 1fr; }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ─────────────────────────────────────────────
@@ -597,7 +827,10 @@
       position: relative;
       transition: border-color .2s;
     }
-    .testimonial-card:hover { border-color: rgba(245,158,11,.2); }
+
+    .testimonial-card:hover {
+      border-color: rgba(245, 158, 11, .2);
+    }
 
     .testimonial-quote {
       font-size: 38px;
@@ -621,43 +854,68 @@
       align-items: center;
       gap: 12px;
     }
+
     .testimonial-avatar {
-      width: 44px; height: 44px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: 'Sora', sans-serif;
       font-weight: 700;
       font-size: 16px;
       flex-shrink: 0;
     }
-    .avatar-1 { background: rgba(245,158,11,.2); color: var(--amber); }
-    .avatar-2 { background: rgba(59,130,246,.2);  color: var(--blue); }
 
-    .testimonial-name { font-size: 14px; font-weight: 600; color: #fff; }
-    .testimonial-role { font-size: 12px; color: var(--text-dim); }
+    .avatar-1 {
+      background: rgba(245, 158, 11, .2);
+      color: var(--amber);
+    }
+
+    .avatar-2 {
+      background: rgba(59, 130, 246, .2);
+      color: var(--blue);
+    }
+
+    .testimonial-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .testimonial-role {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
 
     .beta-badge {
       position: absolute;
-      top: 16px; right: 16px;
+      top: 16px;
+      right: 16px;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: .08em;
       text-transform: uppercase;
-      background: rgba(59,130,246,.12);
+      background: rgba(59, 130, 246, .12);
       color: var(--blue);
-      border: 1px solid rgba(59,130,246,.25);
+      border: 1px solid rgba(59, 130, 246, .25);
       padding: 3px 8px;
       border-radius: 999px;
     }
 
     @media (max-width: 640px) {
-      .testimonials-grid { grid-template-columns: 1fr; }
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ─────────────────────────────────────────────
        PRICING
     ───────────────────────────────────────────── */
-    #pricing { background: var(--bg-card-alt); }
+    #pricing {
+      background: var(--bg-card-alt);
+    }
 
     .pricing-wrapper {
       max-width: 580px;
@@ -666,17 +924,20 @@
 
     .pricing-card {
       background: var(--bg-card);
-      border: 1px solid rgba(245,158,11,.25);
+      border: 1px solid rgba(245, 158, 11, .25);
       border-radius: var(--radius-lg);
       padding: 48px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 0 80px rgba(245,158,11,.07);
+      box-shadow: 0 0 80px rgba(245, 158, 11, .07);
     }
+
     .pricing-card::after {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 3px;
       background: linear-gradient(90deg, var(--amber), var(--blue));
     }
@@ -687,7 +948,7 @@
       font-weight: 700;
       letter-spacing: .1em;
       text-transform: uppercase;
-      background: rgba(245,158,11,.12);
+      background: rgba(245, 158, 11, .12);
       color: var(--amber);
       padding: 4px 12px;
       border-radius: 999px;
@@ -700,7 +961,14 @@
       gap: 6px;
       margin-bottom: 8px;
     }
-    .pricing-currency { font-size: 22px; font-weight: 700; color: var(--text-muted); margin-top: 8px; }
+
+    .pricing-currency {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
     .pricing-amount {
       font-family: 'Sora', sans-serif;
       font-size: 68px;
@@ -708,14 +976,21 @@
       color: #fff;
       line-height: 1;
     }
-    .pricing-period { font-size: 15px; color: var(--text-dim); }
+
+    .pricing-period {
+      font-size: 15px;
+      color: var(--text-dim);
+    }
 
     .pricing-note {
       font-size: 13px;
       color: var(--text-muted);
       margin-bottom: 32px;
     }
-    .pricing-note strong { color: var(--amber); }
+
+    .pricing-note strong {
+      color: var(--amber);
+    }
 
     .pricing-divider {
       height: 1px;
@@ -739,6 +1014,7 @@
       gap: 12px;
       margin-bottom: 36px;
     }
+
     .pricing-list li {
       display: flex;
       align-items: center;
@@ -746,16 +1022,23 @@
       font-size: 15px;
       color: var(--text);
     }
+
     .pricing-check {
-      width: 20px; height: 20px;
-      background: rgba(34,197,94,.12);
+      width: 20px;
+      height: 20px;
+      background: rgba(34, 197, 94, .12);
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
       color: #22c55e;
     }
 
-    .pricing-cta { width: 100%; justify-content: center; }
+    .pricing-cta {
+      width: 100%;
+      justify-content: center;
+    }
 
     .pricing-guarantee {
       margin-top: 20px;
@@ -765,14 +1048,22 @@
     }
 
     @media (max-width: 480px) {
-      .pricing-card { padding: 32px 24px; }
-      .pricing-amount { font-size: 52px; }
+      .pricing-card {
+        padding: 32px 24px;
+      }
+
+      .pricing-amount {
+        font-size: 52px;
+      }
     }
 
     /* ─────────────────────────────────────────────
        FORM / CTA SECTION
     ───────────────────────────────────────────── */
-    #demo { position: relative; overflow: hidden; }
+    #demo {
+      position: relative;
+      overflow: hidden;
+    }
 
     .form-blob {
       position: absolute;
@@ -781,15 +1072,21 @@
       pointer-events: none;
       z-index: 0;
     }
+
     .form-blob-1 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(245,158,11,.08) 0%, transparent 70%);
-      bottom: -80px; left: -80px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(245, 158, 11, .08) 0%, transparent 70%);
+      bottom: -80px;
+      left: -80px;
     }
+
     .form-blob-2 {
-      width: 350px; height: 350px;
-      background: radial-gradient(circle, rgba(59,130,246,.07) 0%, transparent 70%);
-      top: -60px; right: -60px;
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(59, 130, 246, .07) 0%, transparent 70%);
+      top: -60px;
+      right: -60px;
     }
 
     .form-wrapper {
@@ -811,6 +1108,7 @@
       color: #fff;
       margin-bottom: 8px;
     }
+
     .form-sub {
       font-size: 15px;
       color: var(--text-muted);
@@ -823,6 +1121,7 @@
       gap: 6px;
       margin-bottom: 20px;
     }
+
     .form-label {
       font-size: 13px;
       font-weight: 600;
@@ -832,7 +1131,7 @@
     .form-input,
     .form-select {
       width: 100%;
-      background: rgba(255,255,255,.04);
+      background: rgba(255, 255, 255, .04);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 13px 16px;
@@ -844,11 +1143,15 @@
       -webkit-appearance: none;
       appearance: none;
     }
-    .form-input::placeholder { color: var(--text-dim); }
+
+    .form-input::placeholder {
+      color: var(--text-dim);
+    }
+
     .form-input:focus,
     .form-select:focus {
       border-color: var(--amber);
-      background: rgba(245,158,11,.04);
+      background: rgba(245, 158, 11, .04);
     }
 
     .form-select {
@@ -857,6 +1160,7 @@
       background-position: right 14px center;
       cursor: pointer;
     }
+
     .form-select option {
       background: #111827;
       color: var(--text);
@@ -882,25 +1186,39 @@
       text-align: center;
       padding: 48px 24px;
     }
-    .form-success.visible { display: block; }
+
+    .form-success.visible {
+      display: block;
+    }
+
     .form-success-icon {
-      width: 72px; height: 72px;
-      background: rgba(34,197,94,.12);
-      border: 1px solid rgba(34,197,94,.25);
+      width: 72px;
+      height: 72px;
+      background: rgba(34, 197, 94, .12);
+      border: 1px solid rgba(34, 197, 94, .25);
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: #22c55e;
       margin: 0 auto 24px;
     }
+
     .form-success-title {
       font-size: 24px;
       color: #fff;
       margin-bottom: 12px;
     }
-    .form-success-text { font-size: 15px; color: var(--text-muted); }
+
+    .form-success-text {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
 
     @media (max-width: 480px) {
-      .form-card { padding: 28px 20px; }
+      .form-card {
+        padding: 28px 20px;
+      }
     }
 
     /* ─────────────────────────────────────────────
@@ -928,11 +1246,15 @@
       font-weight: 700;
       color: #fff;
     }
+
     .footer-logo-icon {
-      width: 28px; height: 28px;
+      width: 28px;
+      height: 28px;
       background: var(--amber);
       border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: #0a0f1e;
       flex-shrink: 0;
     }
@@ -943,12 +1265,16 @@
       list-style: none;
       flex-wrap: wrap;
     }
+
     .footer-links a {
       font-size: 13px;
       color: var(--text-dim);
       transition: color .15s;
     }
-    .footer-links a:hover { color: var(--text-muted); }
+
+    .footer-links a:hover {
+      color: var(--text-muted);
+    }
 
     .footer-copy {
       font-size: 12px;
@@ -956,14 +1282,17 @@
     }
 
     @media (max-width: 640px) {
-      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     /* ─────────────────────────────────────────────
        CONSORCIO / PLG SECTION
     ───────────────────────────────────────────── */
     #consorcio {
-      background: linear-gradient(135deg, rgba(59,130,246,.05) 0%, rgba(245,158,11,.05) 100%);
+      background: linear-gradient(135deg, rgba(59, 130, 246, .05) 0%, rgba(245, 158, 11, .05) 100%);
     }
 
     .consorcio-inner {
@@ -979,9 +1308,9 @@
       font-weight: 700;
       letter-spacing: .1em;
       text-transform: uppercase;
-      background: rgba(59,130,246,.12);
+      background: rgba(59, 130, 246, .12);
       color: var(--blue);
-      border: 1px solid rgba(59,130,246,.2);
+      border: 1px solid rgba(59, 130, 246, .2);
       padding: 4px 12px;
       border-radius: 999px;
       margin-bottom: 20px;
@@ -1012,23 +1341,27 @@
       display: flex;
       gap: 16px;
       align-items: flex-start;
-      background: rgba(255,255,255,.03);
+      background: rgba(255, 255, 255, .03);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 20px 22px;
       transition: border-color .2s, transform .2s;
     }
+
     .consorcio-item:hover {
-      border-color: rgba(59,130,246,.28);
+      border-color: rgba(59, 130, 246, .28);
       transform: translateX(4px);
     }
 
     .consorcio-item-icon {
-      width: 40px; height: 40px;
-      background: rgba(59,130,246,.10);
-      border: 1px solid rgba(59,130,246,.18);
+      width: 40px;
+      height: 40px;
+      background: rgba(59, 130, 246, .10);
+      border: 1px solid rgba(59, 130, 246, .18);
       border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--blue);
       flex-shrink: 0;
     }
@@ -1047,18 +1380,34 @@
     }
 
     @media (max-width: 820px) {
-      .consorcio-inner { grid-template-columns: 1fr; gap: 40px; }
+      .consorcio-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
     }
 
     /* ─────────────────────────────────────────────
        SCROLLBAR
     ───────────────────────────────────────────── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: rgba(245,158,11,.3); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(245,158,11,.5); }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(245, 158, 11, .3);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(245, 158, 11, .5);
+    }
   </style>
 </head>
+
 <body>
 
   <!-- ─────────────────────────────────────────────
@@ -1069,9 +1418,10 @@
       <div class="nav-inner">
         <a href="#" class="nav-logo">
           <div class="nav-logo-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
             </svg>
           </div>
           LiftManager
@@ -1087,8 +1437,11 @@
         <div class="nav-right">
           <a href="#demo" class="btn btn-primary">Solicitar demo</a>
           <button class="nav-menu-btn" id="menuToggle" aria-label="Menú">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
             </svg>
           </button>
         </div>
@@ -1098,10 +1451,10 @@
 
   <!-- Mobile menu -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#pains"    onclick="closeMobileMenu()">El problema</a>
+    <a href="#pains" onclick="closeMobileMenu()">El problema</a>
     <a href="#solution" onclick="closeMobileMenu()">Cómo funciona</a>
     <a href="#features" onclick="closeMobileMenu()">Features</a>
-    <a href="#pricing"  onclick="closeMobileMenu()">Precios</a>
+    <a href="#pricing" onclick="closeMobileMenu()">Precios</a>
     <a href="#demo" class="btn btn-primary" onclick="closeMobileMenu()">Solicitar demo</a>
   </div>
 
@@ -1128,20 +1481,27 @@
           </h1>
 
           <p class="hero-sub reveal reveal-delay-2">
-            LiftManager es el sistema diseñado para empresas de mantenimiento de ascensores, montautos, portones y rampas.
+            LiftManager es el sistema diseñado para empresas de mantenimiento de ascensores, montautos, portones y
+            rampas.
             Órdenes de trabajo, historial por edificio y facturación con AFIP, todo en un lugar.
           </p>
 
           <div class="hero-cta-row reveal reveal-delay-3">
             <a href="#demo" class="btn btn-primary btn-lg">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
               Quiero probar gratis
             </a>
             <a href="#solution" class="btn btn-outline">Ver cómo funciona</a>
           </div>
 
           <div class="hero-trust reveal reveal-delay-4">
-            <svg class="hero-trust-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg class="hero-trust-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
             Sin contrato de permanencia &nbsp;·&nbsp; Cancelás cuando querés
           </div>
         </div>
@@ -1150,7 +1510,11 @@
         <div class="hero-visual reveal reveal-delay-2">
           <div class="hero-card">
             <div class="hero-card-header">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
               <div>
                 <div class="hero-card-title">Órdenes de trabajo</div>
                 <div class="hero-card-subtitle">Hoy &mdash; 4 pendientes</div>
@@ -1160,7 +1524,11 @@
             <div class="ot-list">
               <div class="ot-item">
                 <div class="ot-icon amber">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                      d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                  </svg>
                 </div>
                 <div>
                   <div class="ot-text-main">Mant. preventivo &mdash; Av. Corrientes 1450</div>
@@ -1172,7 +1540,10 @@
               </div>
               <div class="ot-item">
                 <div class="ot-icon green">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
                 </div>
                 <div>
                   <div class="ot-text-main">Revisión puertas &mdash; Belgrano 3200</div>
@@ -1184,7 +1555,11 @@
               </div>
               <div class="ot-item">
                 <div class="ot-icon blue">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
                 </div>
                 <div>
                   <div class="ot-text-main">Cambio motor &mdash; Palermo Soho Torre B</div>
@@ -1198,7 +1573,11 @@
           </div>
 
           <div class="float-stat">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+              <polyline points="16 7 22 7 22 13" />
+            </svg>
             <div>
               <div class="float-stat-num">3.2h</div>
               <div class="float-stat-label">ahorradas<br>por semana</div>
@@ -1220,7 +1599,8 @@
       <div class="section-header">
         <span class="section-label reveal">El problema</span>
         <h2 class="section-title reveal reveal-delay-1">Así trabajan hoy la mayoría<br>de las empresas del rubro</h2>
-        <p class="section-sub reveal reveal-delay-2">Si te sentís identificado con algo de esto, LiftManager está diseñado para vos.</p>
+        <p class="section-sub reveal reveal-delay-2">Si te sentís identificado con algo de esto, LiftManager está
+          diseñado para vos.</p>
       </div>
 
       <div class="pain-grid">
@@ -1228,7 +1608,8 @@
           <span class="pain-emoji">📋</span>
           <h3 class="pain-title">Órdenes de trabajo en Excel y WhatsApp</h3>
           <p class="pain-desc">
-            Los técnicos avisan por WhatsApp, los pedidos se anotan en planillas, y al final del día nadie sabe qué se hizo, quién lo hizo ni cuánto cobrar. Un trabajo sin registrar es plata que no entra.
+            Los técnicos avisan por WhatsApp, los pedidos se anotan en planillas, y al final del día nadie sabe qué se
+            hizo, quién lo hizo ni cuánto cobrar. Un trabajo sin registrar es plata que no entra.
           </p>
         </div>
 
@@ -1236,7 +1617,8 @@
           <span class="pain-emoji">🏢</span>
           <h3 class="pain-title">El historial del edificio siempre se pierde</h3>
           <p class="pain-desc">
-            Cambiás un técnico y se va con todo el conocimiento del edificio en la cabeza. No sabés cuándo fue el último mantenimiento, qué repuestos se pusieron ni qué problemas tuvo el ascensor.
+            Cambiás un técnico y se va con todo el conocimiento del edificio en la cabeza. No sabés cuándo fue el último
+            mantenimiento, qué repuestos se pusieron ni qué problemas tuvo el ascensor.
           </p>
         </div>
 
@@ -1244,7 +1626,8 @@
           <span class="pain-emoji">🧾</span>
           <h3 class="pain-title">Facturar con AFIP es un dolor de cabeza</h3>
           <p class="pain-desc">
-            Cada factura a mano en el portal de AFIP consume tiempo que no tenés. Los errores, las notas de crédito y el seguimiento de cobros se acumulan hasta que el contador llama desesperado.
+            Cada factura a mano en el portal de AFIP consume tiempo que no tenés. Los errores, las notas de crédito y el
+            seguimiento de cobros se acumulan hasta que el contador llama desesperado.
           </p>
         </div>
       </div>
@@ -1262,7 +1645,8 @@
         <span class="section-label reveal">Cómo lo resolvemos</span>
         <h2 class="section-title reveal reveal-delay-1">Un sistema pensado<br>para el trabajo real</h2>
         <p class="section-sub reveal reveal-delay-2">
-          LiftManager reemplaza el Excel y el WhatsApp con herramientas que tus técnicos pueden usar desde el celular, sin capacitación larga.
+          LiftManager reemplaza el Excel y el WhatsApp con herramientas que tus técnicos pueden usar desde el celular,
+          sin capacitación larga.
         </p>
       </div>
 
@@ -1270,31 +1654,46 @@
 
         <div class="solution-block reveal">
           <div class="solution-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 11l3 3L22 4" />
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+            </svg>
           </div>
           <h3 class="solution-title">Órdenes de trabajo desde el celular</h3>
           <p class="solution-desc">
-            El técnico recibe la orden en su teléfono, registra lo que hizo, saca fotos si necesita, y al terminar la cierra con un toque. Vos ves el estado en tiempo real desde el panel web, sin llamar a nadie.
+            El técnico recibe la orden en su teléfono, registra lo que hizo, saca fotos si necesita, y al terminar la
+            cierra con un toque. Vos ves el estado en tiempo real desde el panel web, sin llamar a nadie.
           </p>
         </div>
 
         <div class="solution-block reveal reveal-delay-1">
           <div class="solution-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
           </div>
           <h3 class="solution-title">Historial completo por edificio</h3>
           <p class="solution-desc">
-            Cada edificio tiene su ficha: todos los ascensores, todos los trabajos, todos los repuestos usados. Cuando llega un técnico nuevo, tiene todo el contexto en segundos. Nada se pierde.
+            Cada edificio tiene su ficha: todos los ascensores, todos los trabajos, todos los repuestos usados. Cuando
+            llega un técnico nuevo, tiene todo el contexto en segundos. Nada se pierde.
           </p>
         </div>
 
         <div class="solution-block reveal reveal-delay-2">
           <div class="solution-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+              <line x1="1" y1="10" x2="23" y2="10" />
+            </svg>
           </div>
           <h3 class="solution-title">Facturación automática con AFIP/ARCA</h3>
           <p class="solution-desc">
-            Cuando cerrás una orden de trabajo, LiftManager genera y envía la factura electrónica a AFIP sin que toques nada. Los cobros quedan registrados y podés ver qué está pendiente de pago de un vistazo.
+            Cuando cerrás una orden de trabajo, LiftManager genera y envía la factura electrónica a AFIP sin que toques
+            nada. Los cobros quedan registrados y podés ver qué está pendiente de pago de un vistazo.
           </p>
         </div>
 
@@ -1318,61 +1717,106 @@
 
         <div class="feature-card reveal">
           <div class="feature-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="5" height="5"/><rect x="16" y="3" width="5" height="5"/><rect x="16" y="16" width="5" height="5"/><rect x="3" y="16" width="5" height="5"/><line x1="10" y1="5" x2="14" y2="5"/><line x1="10" y1="19" x2="14" y2="19"/><line x1="5" y1="10" x2="5" y2="14"/><line x1="19" y1="10" x2="19" y2="14"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="5" height="5" />
+              <rect x="16" y="3" width="5" height="5" />
+              <rect x="16" y="16" width="5" height="5" />
+              <rect x="3" y="16" width="5" height="5" />
+              <line x1="10" y1="5" x2="14" y2="5" />
+              <line x1="10" y1="19" x2="14" y2="19" />
+              <line x1="5" y1="10" x2="5" y2="14" />
+              <line x1="19" y1="10" x2="19" y2="14" />
+            </svg>
           </div>
           <div>
             <h3 class="feature-title">QR por equipo — sin descarga</h3>
-            <p class="feature-desc">El técnico llega al edificio, escanea el QR del equipo y ve sus órdenes del día. Las cierra desde el celular en segundos. Sin cuenta, sin app, sin fricción.</p>
+            <p class="feature-desc">El técnico llega al edificio, escanea el QR del equipo y ve sus órdenes del día. Las
+              cierra desde el celular en segundos. Sin cuenta, sin app, sin fricción.</p>
           </div>
         </div>
 
         <div class="feature-card reveal reveal-delay-1">
           <div class="feature-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg>
           </div>
           <div>
             <h3 class="feature-title">Panel web de administración</h3>
-            <p class="feature-desc">Supervisá técnicos, edificios, órdenes y cobros desde la computadora. Todo en un tablero claro y sin complicaciones.</p>
+            <p class="feature-desc">Supervisá técnicos, edificios, órdenes y cobros desde la computadora. Todo en un
+              tablero claro y sin complicaciones.</p>
           </div>
         </div>
 
         <div class="feature-card reveal reveal-delay-2">
           <div class="feature-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+            </svg>
           </div>
           <div>
             <h3 class="feature-title">Múltiples tipos de equipos</h3>
-            <p class="feature-desc">Ascensores, montautos, portones, rampas y más. Cada tipo tiene su configuración, sus intervalos de mantenimiento y su historial independiente.</p>
+            <p class="feature-desc">Ascensores, montautos, portones, rampas y más. Cada tipo tiene su configuración, sus
+              intervalos de mantenimiento y su historial independiente.</p>
           </div>
         </div>
 
         <div class="feature-card reveal reveal-delay-3">
           <div class="feature-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23" />
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
           </div>
           <div>
             <h3 class="feature-title">Gestión de precios y tarifas</h3>
-            <p class="feature-desc">Ajustá precios por tipo de equipo, simulá el impacto antes de aplicar y llevá un historial de cambios. Clave para actualizar tarifas con la inflación.</p>
+            <p class="feature-desc">Ajustá precios por tipo de equipo, simulá el impacto antes de aplicar y llevá un
+              historial de cambios. Clave para actualizar tarifas con la inflación.</p>
           </div>
         </div>
 
         <div class="feature-card reveal reveal-delay-1">
           <div class="feature-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
           </div>
           <div>
             <h3 class="feature-title">Reportes listos para el contador</h3>
-            <p class="feature-desc">Exportá resúmenes de facturación, IVA y servicios prestados en segundos. Sin armar planillas a mano cada mes.</p>
+            <p class="feature-desc">Exportá resúmenes de facturación, IVA y servicios prestados en segundos. Sin armar
+              planillas a mano cada mes.</p>
           </div>
         </div>
 
         <div class="feature-card reveal reveal-delay-2">
           <div class="feature-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+              <line x1="6" y1="1" x2="6" y2="4" />
+              <line x1="10" y1="1" x2="10" y2="4" />
+              <line x1="14" y1="1" x2="14" y2="4" />
+            </svg>
           </div>
           <div>
             <h3 class="feature-title">Alertas de mantenimiento vencido</h3>
-            <p class="feature-desc">El sistema te avisa automáticamente qué edificios tienen mantenimiento próximo o vencido. Nunca más te olvidás de un cliente.</p>
+            <p class="feature-desc">El sistema te avisa automáticamente qué edificios tienen mantenimiento próximo o
+              vencido. Nunca más te olvidás de un cliente.</p>
           </div>
         </div>
 
@@ -1393,7 +1837,9 @@
           <span class="consorcio-label">Para el edificio también</span>
           <h2 class="consorcio-title">Tus clientes van a pedirle esto a cualquier empresa que contraten</h2>
           <p class="consorcio-desc">
-            Cada edificio que atendés acumula historial en LiftManager. El consorcio puede ver sus equipos, recibe notificaciones automáticas después de cada visita y reporta fallas sin llamar a nadie. Cuando ven otra empresa, ya extrañan esto.
+            Cada edificio que atendés acumula historial en LiftManager. El consorcio puede ver sus equipos, recibe
+            notificaciones automáticas después de cada visita y reporta fallas sin llamar a nadie. Cuando ven otra
+            empresa, ya extrañan esto.
           </p>
         </div>
 
@@ -1401,31 +1847,47 @@
 
           <div class="consorcio-item reveal reveal-delay-1">
             <div class="consorcio-item-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
             </div>
             <div>
               <div class="consorcio-item-title">Portal del consorcio</div>
-              <div class="consorcio-item-desc">La administradora accede con un link único al historial completo de sus equipos — sin cuenta, sin descarga. Ve la última visita, qué se hizo y cuándo es la próxima.</div>
+              <div class="consorcio-item-desc">La administradora accede con un link único al historial completo de sus
+                equipos — sin cuenta, sin descarga. Ve la última visita, qué se hizo y cuándo es la próxima.</div>
             </div>
           </div>
 
           <div class="consorcio-item reveal reveal-delay-2">
             <div class="consorcio-item-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.54a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.54a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
             </div>
             <div>
               <div class="consorcio-item-title">Notificación automática post-visita</div>
-              <div class="consorcio-item-desc">Cuando el técnico cierra la orden, el consorcio recibe un resumen por email: qué se hizo, quién fue y cuándo es el próximo mantenimiento. Sin que nadie lo llame.</div>
+              <div class="consorcio-item-desc">Cuando el técnico cierra la orden, el consorcio recibe un resumen por
+                email: qué se hizo, quién fue y cuándo es el próximo mantenimiento. Sin que nadie lo llame.</div>
             </div>
           </div>
 
           <div class="consorcio-item reveal reveal-delay-3">
             <div class="consorcio-item-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
             </div>
             <div>
               <div class="consorcio-item-title">Reporte de fallas sin registro</div>
-              <div class="consorcio-item-desc">Cualquier vecino escanea el QR del equipo, describe la falla y adjunta una foto. Se crea una OT automáticamente. Sin app, sin cuenta, sin fricción.</div>
+              <div class="consorcio-item-desc">Cualquier vecino escanea el QR del equipo, describe la falla y adjunta
+                una foto. Se crea una OT automáticamente. Sin app, sin cuenta, sin fricción.</div>
             </div>
           </div>
 
@@ -1449,10 +1911,11 @@
       <div class="testimonials-grid">
 
         <div class="testimonial-card reveal">
-          <span class="beta-badge">Tester beta</span>
+          <span class="beta-badge">Early access</span>
           <div class="testimonial-quote">&ldquo;</div>
           <p class="testimonial-text">
-            Antes tardaba dos horas los viernes cerrando las órdenes de la semana y armando las facturas. Ahora lo hago en veinte minutos porque ya están todas cargadas. Y lo de AFIP automático me cambió la vida, en serio.
+            Antes tardaba dos horas los viernes cerrando las órdenes de la semana y armando las facturas. Ahora lo hago
+            en veinte minutos porque ya están todas cargadas. Y lo de AFIP automático me cambió la vida, en serio.
           </p>
           <div class="testimonial-author">
             <div class="testimonial-avatar avatar-1">MR</div>
@@ -1464,10 +1927,12 @@
         </div>
 
         <div class="testimonial-card reveal reveal-delay-1">
-          <span class="beta-badge">Tester beta</span>
+          <span class="beta-badge">Early access</span>
           <div class="testimonial-quote">&ldquo;</div>
           <p class="testimonial-text">
-            Tengo cuatro técnicos y antes me la pasaba llamándolos para saber cómo iban. Ahora entro al panel y veo todo. El historial por edificio también es clave; un cliente me preguntó algo de hace seis meses y lo encontré al toque.
+            Tengo cuatro técnicos y antes me la pasaba llamándolos para saber cómo iban. Ahora entro al panel y veo
+            todo. El historial por edificio también es clave; un cliente me preguntó algo de hace seis meses y lo
+            encontré al toque.
           </p>
           <div class="testimonial-author">
             <div class="testimonial-avatar avatar-2">VF</div>
@@ -1492,7 +1957,8 @@
       <div class="section-header centered">
         <span class="section-label reveal">Precios</span>
         <h2 class="section-title reveal reveal-delay-1">Simple. Sin sorpresas.</h2>
-        <p class="section-sub reveal reveal-delay-2">Un solo plan con todo incluido. El precio se ajusta por cantidad de técnicos.</p>
+        <p class="section-sub reveal reveal-delay-2">Un solo plan con todo incluido. El precio se ajusta por cantidad de
+          técnicos.</p>
       </div>
 
       <div class="pricing-wrapper">
@@ -1501,10 +1967,9 @@
 
           <div class="pricing-price">
             <span class="pricing-currency">$</span>
-            <span class="pricing-amount">XX</span>
-            <span class="pricing-period">&nbsp;/ mes por técnico</span>
+            <span class="pricing-amount">99K</span>
+            <span class="pricing-period">&nbsp;ARS / mes por técnico</span>
           </div>
-          <!-- TODO: reemplazar $XX con el precio real antes de lanzar -->
 
           <p class="pricing-note">
             <strong>Primer mes completamente gratis.</strong> Sin tarjeta de crédito. Sin compromiso.
@@ -1517,55 +1982,82 @@
           <ul class="pricing-list">
             <li>
               <span class="pricing-check">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </span>
-              App mobile para técnicos (iOS y Android)
+              Interfaz mobile para técnicos (optimizada para celular)
             </li>
             <li>
               <span class="pricing-check">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </span>
               Panel web de administración
             </li>
             <li>
               <span class="pricing-check">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </span>
               Facturación electrónica con AFIP/ARCA
             </li>
             <li>
               <span class="pricing-check">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </span>
               Historial completo por edificio y equipo
             </li>
             <li>
               <span class="pricing-check">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </span>
               QR por equipo — técnico cierra OTs desde el celular, sin cuenta
             </li>
             <li>
               <span class="pricing-check">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </span>
               Portal del consorcio con historial por edificio
             </li>
             <li>
               <span class="pricing-check">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </span>
               Reporte de fallas público por QR — sin registro
             </li>
             <li>
               <span class="pricing-check">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </span>
               Alertas de mantenimiento vencido
             </li>
             <li>
               <span class="pricing-check">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </span>
               Soporte en español por WhatsApp
             </li>
@@ -1573,7 +2065,10 @@
 
           <a href="#demo" class="btn btn-primary btn-lg pricing-cta">
             Empezar gratis un mes
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
           </a>
 
           <p class="pricing-guarantee">
@@ -1604,46 +2099,27 @@
           <!-- Form (visible by default) -->
           <div id="formContainer">
             <h2 class="form-title">Quiero probar LiftManager</h2>
-            <p class="form-sub">Completá el formulario y te contactamos en menos de 24 horas para mostrarte cómo funciona.</p>
+            <p class="form-sub">Completá el formulario y te contactamos en menos de 24 horas para mostrarte cómo
+              funciona.</p>
 
             <form id="demoForm" novalidate>
 
               <div class="form-group">
                 <label class="form-label" for="field-name">Nombre y apellido *</label>
-                <input
-                  class="form-input"
-                  type="text"
-                  id="field-name"
-                  name="name"
-                  placeholder="Juan Pérez"
-                  autocomplete="name"
-                  required
-                />
+                <input class="form-input" type="text" id="field-name" name="name" placeholder="Juan Pérez"
+                  autocomplete="name" required />
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="field-email">Email *</label>
-                <input
-                  class="form-input"
-                  type="email"
-                  id="field-email"
-                  name="email"
-                  placeholder="juan@empresa.com"
-                  autocomplete="email"
-                  required
-                />
+                <input class="form-input" type="email" id="field-email" name="email" placeholder="juan@empresa.com"
+                  autocomplete="email" required />
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="field-company">Empresa</label>
-                <input
-                  class="form-input"
-                  type="text"
-                  id="field-company"
-                  name="company"
-                  placeholder="Ascensores del Sur"
-                  autocomplete="organization"
-                />
+                <input class="form-input" type="text" id="field-company" name="company" placeholder="Ascensores del Sur"
+                  autocomplete="organization" />
               </div>
 
               <div class="form-group">
@@ -1658,7 +2134,10 @@
 
               <button type="submit" class="btn btn-primary btn-lg form-submit">
                 Solicitar mi demo gratuita
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </button>
 
               <p class="form-legal">
@@ -1670,11 +2149,15 @@
           <!-- Success message (hidden by default) -->
           <div class="form-success" id="formSuccess">
             <div class="form-success-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
             </div>
             <h3 class="form-success-title">¡Listo! Te contactamos pronto.</h3>
             <p class="form-success-text">
-              Recibimos tu solicitud. Un asesor de LiftManager te va a escribir en menos de 24 horas para coordinar la demo.<br><br>
+              Recibimos tu solicitud. Un asesor de LiftManager te va a escribir en menos de 24 horas para coordinar la
+              demo.<br><br>
               <strong style="color: var(--amber);">Revisá tu bandeja de entrada.</strong>
             </p>
           </div>
@@ -1695,17 +2178,20 @@
 
         <div class="footer-logo">
           <div class="footer-logo-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
           </div>
           LiftManager
         </div>
 
         <ul class="footer-links">
-          <!-- TODO: reemplazar href="#" con las URLs reales cuando estén disponibles -->
           <li><a href="#">Términos de uso</a></li>
           <li><a href="#">Política de privacidad</a></li>
-          <li><a href="#">Soporte</a></li>
-          <li><a href="#">Contacto</a></li>
+          <li><a href="https://wa.me/543424639480" target="_blank" rel="noopener">Soporte por WhatsApp</a></li>
+          <li><a href="#demo">Contacto</a></li>
         </ul>
 
         <p class="footer-copy">&copy; 2026 LiftManager. Todos los derechos reservados.</p>
@@ -1728,8 +2214,8 @@
 
 
     // ── Mobile menu toggle ───────────────────────────────────────────────────
-    const menuToggle  = document.getElementById('menuToggle');
-    const mobileMenu  = document.getElementById('mobileMenu');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
 
     menuToggle.addEventListener('click', () => {
       mobileMenu.classList.toggle('open');
@@ -1764,25 +2250,25 @@
 
 
     // ── Formulario de demo ───────────────────────────────────────────────────
-    const demoForm      = document.getElementById('demoForm');
+    const demoForm = document.getElementById('demoForm');
     const formContainer = document.getElementById('formContainer');
-    const formSuccess   = document.getElementById('formSuccess');
+    const formSuccess = document.getElementById('formSuccess');
 
-    demoForm.addEventListener('submit', function (e) {
+    demoForm.addEventListener('submit', async function (e) {
       e.preventDefault();
 
       // Validación básica
-      const name        = demoForm.querySelector('#field-name').value.trim();
-      const email       = demoForm.querySelector('#field-email').value.trim();
-      const company     = demoForm.querySelector('#field-company').value.trim();
+      const name = demoForm.querySelector('#field-name').value.trim();
+      const email = demoForm.querySelector('#field-email').value.trim();
+      const company = demoForm.querySelector('#field-company').value.trim();
       const technicians = demoForm.querySelector('#field-technicians').value;
 
       if (!name || !email || !technicians) {
         // Resaltar campos vacíos requeridos
         [
-          { id: 'field-name',         val: name },
-          { id: 'field-email',        val: email },
-          { id: 'field-technicians',  val: technicians },
+          { id: 'field-name', val: name },
+          { id: 'field-email', val: email },
+          { id: 'field-technicians', val: technicians },
         ].forEach(({ id, val }) => {
           const el = document.getElementById(id);
           if (!val) {
@@ -1808,26 +2294,31 @@
         email,
         company,
         technicians,
-        timestamp: new Date().toISOString(),
-        source: 'landing_page',
+        _subject: `Nuevo lead LiftManager — ${name}`,
       };
 
-      // ── Guardar en localStorage ──────────────────────────────────────────
-      // TODO: Reemplazar este bloque con una llamada POST al backend.
-      // Ejemplo:
-      //   fetch('/api/leads', {
-      //     method: 'POST',
-      //     headers: { 'Content-Type': 'application/json' },
-      //     body: JSON.stringify(lead),
-      //   });
+      // ── Enviar a Formspree ────────────────────────────────────────────────
+      // Para activar: creá una cuenta en formspree.io, creá un nuevo form,
+      // y reemplazá YOUR_FORM_ID con el ID que te dan (ej: "xpwzgkjb").
       // ────────────────────────────────────────────────────────────────────
+      const FORMSPREE_ID = 'xreyjjkg';
+
       try {
-        const key   = 'liftmanager_leads';
-        const leads = JSON.parse(localStorage.getItem(key) || '[]');
-        leads.push(lead);
-        localStorage.setItem(key, JSON.stringify(leads));
+        const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(lead),
+        });
+        if (!res.ok) throw new Error('formspree error');
       } catch (err) {
-        console.warn('No se pudo guardar en localStorage:', err);
+        // Fallback: guardar en localStorage si Formspree falla o no está configurado
+        console.warn('Formspree no disponible, guardando localmente:', err);
+        try {
+          const key = 'liftmanager_leads';
+          const leads = JSON.parse(localStorage.getItem(key) || '[]');
+          leads.push({ ...lead, timestamp: new Date().toISOString() });
+          localStorage.setItem(key, JSON.stringify(leads));
+        } catch (_) { }
       }
 
       // Mostrar mensaje de éxito
@@ -1854,4 +2345,5 @@
 
   </script>
 </body>
+
 </html>
